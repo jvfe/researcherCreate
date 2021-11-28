@@ -1,7 +1,7 @@
 <template>
   <v-sheet color="accent lighten-4" elevation="10" rounded class="pa-2">
     <v-col>
-      <p v-if="term" class="body-2">
+      <!-- <p v-if="term" class="body-2">
         Obtaining up to 300 articles about {{ term.label }} that don't have
         <a
           :href="`http://www.wikidata.org/entity/${term.id}`"
@@ -9,7 +9,7 @@
           >{{ term.id }}</a
         >
         as a main subject
-      </p>
+      </p> -->
       <v-btn @click="copyCommands" color="primary" class="ma-2">
         <v-icon small>mdi-clipboard-outline</v-icon>
         Copy
@@ -38,20 +38,20 @@
 </template>
 
 <script>
-import { querySPARQLService } from "../lib/API";
+import { formatQS } from "../lib/API";
 
 export default {
   name: "QSBox",
-  props: ["term"],
+  props: ["program", "research"],
   data: () => ({
     quickstatements: "",
     loadingQS: false
   }),
 
   watch: {
-    term(val) {
+    program(val) {
       if (val != null) {
-        this.fetchQuery();
+        this.createQS();
       } else {
         this.quickstatements = "";
       }
@@ -59,14 +59,14 @@ export default {
   },
 
   methods: {
-    fetchQuery: async function() {
+    createQS: function() {
       this.loadingQS = true;
-      const queryResult = await querySPARQLService(
-        this.term.id,
-        this.term.label
-      );
+      let QSstring = "";
+      this.research.forEach(researcher => {
+        QSstring += formatQS(researcher, this.program);
+      });
       this.quickstatements =
-        queryResult == "" ? "Couldn't find any articles 😥" : queryResult;
+        QSstring == "" ? "Couldn't find any articles 😥" : QSstring;
       this.loadingQS = false;
     },
     copyCommands: function() {

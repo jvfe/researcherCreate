@@ -73,4 +73,9 @@ async function querySPARQLService(qid, qidLabel) {
 
   return cleanResult;
 }
-export { searchWikibase, querySPARQLService };
+
+function formatQS(researcher, program) {
+  return `${researcher}|P1416|${program}\n`;
+}
+
+export { searchWikibase, querySPARQLService, formatQS };
