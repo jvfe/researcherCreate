@@ -49,7 +49,15 @@ export default {
   }),
 
   watch: {
+    // TODO: Improve this, one watcher with same handler
     program(val) {
+      if (val != null) {
+        this.createQS();
+      } else {
+        this.quickstatements = "";
+      }
+    },
+    research(val) {
       if (val != null) {
         this.createQS();
       } else {
@@ -63,7 +71,7 @@ export default {
       this.loadingQS = true;
       let QSstring = "";
       this.research.forEach(researcher => {
-        QSstring += formatQS(researcher, this.program);
+        QSstring += formatQS(researcher.id, this.program);
       });
       this.quickstatements =
         QSstring == "" ? "Couldn't find any articles 😥" : QSstring;

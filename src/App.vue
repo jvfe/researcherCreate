@@ -66,6 +66,7 @@
                 return-object
                 multiple
                 auto-select-first
+                autofocus
               >
                 <template v-slot:item="{ item }">
                   <v-list-item-content>
@@ -102,7 +103,6 @@
                 item-text="id"
                 prepend-icon="mdi-magnify"
                 solo
-                return-object
               >
                 <template v-slot:item="{ item }">
                   <v-list-item-content>
@@ -117,7 +117,7 @@
               </v-autocomplete>
             </v-col>
           </v-sheet>
-          <v-col> <QSBox :term="term" :research="researcher" /> </v-col>
+          <v-col> <QSBox :program="term" :research="researcher" /> </v-col>
         </v-col>
       </v-row>
     </v-main>
