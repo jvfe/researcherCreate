@@ -1,21 +1,12 @@
 <template>
   <v-sheet color="accent lighten-4" elevation="10" rounded class="pa-2">
     <v-col>
-      <!-- <p v-if="term" class="body-2">
-        Obtaining up to 300 articles about {{ term.label }} that don't have
-        <a
-          :href="`http://www.wikidata.org/entity/${term.id}`"
-          target="_blank"
-          >{{ term.id }}</a
-        >
-        as a main subject
-      </p> -->
-      <v-btn @click="copyCommands" color="primary" class="ma-2">
+      <v-btn @click="copyCommands" color="warning" class="ma-2">
         <v-icon small>mdi-clipboard-outline</v-icon>
         Copy
       </v-btn>
       <v-btn
-        color="warning"
+        color="accent darken-3"
         href="https://quickstatements.toolforge.org/#/batch"
         target="_blank"
         class="ma-2"
@@ -74,13 +65,20 @@ export default {
         QSstring += formatQS(researcher.id, this.program) || "";
       });
       this.quickstatements =
-        QSstring == "" ? "Couldn't find any articles 😥" : QSstring;
+        QSstring == ""
+          ? "Wasn't able to build the QuickStatements 😥"
+          : QSstring;
       this.loadingQS = false;
     },
     copyCommands: function() {
       const qsAreaElement = document.querySelector("#qsArea");
-      qsAreaElement.select();
-      document.execCommand("copy");
+      if (!navigator.clipboard) {
+        // Fallback copy
+        qsAreaElement.select();
+        document.execCommand("copy");
+      } else {
+        navigator.clipboard.writeText(qsAreaElement.value);
+      }
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="purple darken-3" dark>
       <div class="d-flex align-center">
         <h1>researcher2program</h1>
       </div>
@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/jvfe/wikidata_topictagger"
+        href="https://github.com/jvfe/researcherCreate"
         target="_blank"
         text
       >
@@ -122,7 +122,7 @@
       </v-row>
     </v-main>
 
-    <v-footer padless color="primary">
+    <v-footer padless color="purple darken-3">
       <v-col class="text-center white--text" cols="12">
         Made by
         <a
