@@ -71,7 +71,7 @@ export default {
       this.loadingQS = true;
       let QSstring = "";
       this.research.forEach(researcher => {
-        QSstring += formatQS(researcher.id, this.program);
+        QSstring += formatQS(researcher.id, this.program) || "";
       });
       this.quickstatements =
         QSstring == "" ? "Couldn't find any articles 😥" : QSstring;

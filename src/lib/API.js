@@ -75,6 +75,9 @@ async function querySPARQLService(qid, qidLabel) {
 }
 
 function formatQS(researcher, program) {
+  if (researcher == null) {
+    return;
+  }
   return `${researcher}|P1416|${program}\n`;
 }
 
