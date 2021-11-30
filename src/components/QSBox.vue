@@ -5,12 +5,7 @@
         <v-icon small>mdi-clipboard-outline</v-icon>
         Copy
       </v-btn>
-      <v-btn
-        color="accent darken-3"
-        href="https://quickstatements.toolforge.org/#/batch"
-        target="_blank"
-        class="ma-2"
-      >
+      <v-btn color="accent darken-3" @click="goToQS" class="ma-2">
         <v-icon small>mdi-arrow-top-right</v-icon>
         Go to Quickstatements
       </v-btn>
@@ -79,6 +74,12 @@ export default {
       } else {
         navigator.clipboard.writeText(qsAreaElement.value);
       }
+    },
+    goToQS: function() {
+      this.copyCommands();
+      window
+        .open("https://quickstatements.toolforge.org/#/batch", "_blank")
+        .focus();
     }
   }
 };
